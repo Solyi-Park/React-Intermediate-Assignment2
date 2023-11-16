@@ -103,6 +103,7 @@ function Detail() {
 
   // 클릭된 레터 정보 저장
   const [clickedLetter, setClickedLetter] = useState(null);
+  
   return (
     <div>
       <Link to="/">홈으로</Link>
