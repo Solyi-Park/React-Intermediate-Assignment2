@@ -9,9 +9,7 @@ const rootReducer = combineReducers({
     users: users
 
 });
-//2. 만든 rootReducer로 store를 생성해준다.
-const store = createStore(rootReducer);
 
-//3.만든 store를 외부로 export!
+const store = createStore(rootReducer);
 
 export default store;
