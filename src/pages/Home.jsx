@@ -1,13 +1,12 @@
 import "./css/home.css";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
 import initialState from "../shared/data";
 import formatCurrentDateAndTime from "../shared/formatTime";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Letters from "../components/Letters";
-import styled from "styled-components";
+
 
 function Home() {
   const [letters, setLetters] = useState(initialState);
@@ -75,12 +74,11 @@ function Home() {
       return updatedFiltering;
     });
   };
-  // useEffect(() => {
-  //   console.log(memberFiltering);
-  // }, [memberFiltering]);
+  useEffect(() => {
+    console.log(memberFiltering);
+  }, [memberFiltering]);
 
   // 클릭된 펜레터 정보 업데이트 이벤트 핸들러
-
   const handleLetterClick = (clickedLetter) => {
     setClickedLetter(clickedLetter);
   };
