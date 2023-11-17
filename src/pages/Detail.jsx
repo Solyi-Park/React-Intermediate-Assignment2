@@ -1,64 +1,18 @@
+import './css/detail.css'
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import uuid from "react-uuid";
+import { Link, useParams } from "react-router-dom";
+import initialState from '../shared/data'
+
 
 function Detail() {
-  // 현재 날짜, 시간
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const date = currentDate.getDate();
-  const hours = currentDate.getHours();
-  const minutes = currentDate.getMinutes();
-  const seconds = currentDate.getSeconds();
-  const formattedDateAndTime = `${year}.${
-    month + 1
-  }.${date} ${hours}:${minutes}:${seconds}`;
-  // console.log(formattedDateAndTime)
-  const [letters, setLetters] = useState([
-    {
-      id: uuid(),
-      nickName: "팬1",
-      content: "패션왕 도니!",
-      member: "형돈",
-      postTime: formattedDateAndTime,
-    },
-    {
-      id: uuid(),
-      nickName: "팬2",
-      content: "영원한 일인자",
-      member: "재석",
-      postTime: formattedDateAndTime,
-    },
-    {
-      id: uuid(),
-      nickName: "팬3",
-      content: "돌 + I 킹!",
-      member: "홍철",
-      postTime: formattedDateAndTime,
-    },
-    {
-      id: uuid(),
-      nickName: "팬4",
-      content: "아부지~",
-      member: "명수",
-      postTime: formattedDateAndTime,
-    },
-    {
-      id: uuid(),
-      nickName: "팬5",
-      content: "쩌리짱",
-      member: "준하",
-      postTime: formattedDateAndTime,
-    },
-    {
-      id: uuid(),
-      nickName: "팬6",
-      content: "하이브리드 리오레이비 쌤이솟아",
-      member: "하하",
-      postTime: formattedDateAndTime,
-    },
-  ]);
+  const [ letters, setLetters ] = useState(initialState);
+  const params =useParams();
+  console.log('params: ', params)
+  // const foundData = initialState.find(item => {
+  //   return item.id === params.id
+  // })
+
+  
   // 수정모드 관리
   const [editMode, setEditMode] = useState(false);
   // 수정할 내용
@@ -103,6 +57,7 @@ function Detail() {
 
   // 클릭된 레터 정보 저장
   const [clickedLetter, setClickedLetter] = useState(null);
+  console.log('클릭한 레터 정보: ', clickedLetter)
   
   return (
     <div>
