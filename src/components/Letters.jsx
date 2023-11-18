@@ -1,8 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Letters.css";
+import LogoImage from "../assets/logoImg.png";  
+import styled from "styled-components";// 이미지를 import
 
+ const StPfImg = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+ `
 export default function Letters({
-    letters, memberFiltering, handleLetterClick
+  letters, memberFiltering, handleLetterClick
 }) {
   return (
     <section style={{ backgroundColor: "#fabbaf" }}>
@@ -25,7 +33,7 @@ export default function Letters({
                 <Link to={`/detail/${item.id}`}>
                   <div>
                     <div>
-                      <img src="../assets/logoImg.png" alt="LogoImage" />
+                      <StPfImg src={LogoImage} alt="LogoImage" />  {/* 수정된 이미지 소스 사용 */}
                       <div>
                         <p>{item.nickName}</p>
                         <p>{item.postTime}</p>

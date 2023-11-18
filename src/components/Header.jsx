@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+import Film from "../assets/film.png"
 const StHeader = styled.div`
   position: relative;
   /* background-image: url(../../assets/header.jpg); */
   background-color: cadetblue;
-  height: 60vh;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,20 +24,22 @@ const StTitle = styled.h1`
   margin-bottom: 15vh;
   font-family: "YEONGJUPunggiGinsengTTF";
   font-size: 69px;
+  color: white;
 `;
 
 const StBtnsLayOut = styled.img`
   position: absolute;
-  margin-top: 40hv;
+  margin-top: 300px;
+  width: 950px;
 `;
 const StBtns = styled.div`
   position: absolute;
-  margin-top: 35vh;
+  margin: 300px 0 0 4px;
 `;
 
 const StBtn = styled.button`
-  padding: 7vh;
-  margin-right: 10px;
+  padding: 44px 62px;
+  margin-right: 5px;
   border: 1px solid white;
   background-color: #111;
   color: white;
@@ -51,7 +53,7 @@ function Header({ showLetters }) {
   return (
     <StHeader>
       <StTitle>영원하라 무도!</StTitle>
-      <StBtnsLayOut src="../../film.png" alt="btnsLayout" />
+      <StBtnsLayOut src={Film} alt="btnsLayout" />
       <StBtns>
         <StBtn class="btn" onClick={() => showLetters("재석")}>
           재석
