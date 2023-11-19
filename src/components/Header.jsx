@@ -1,11 +1,17 @@
-import React from "react";
+// Header.jsx
+
+import React, { useState } from "react";
 import styled from "styled-components";
-import Film from "../assets/film.png"
+import Hodong from "../assets/호동.jpg";
+import Suguen from "../assets/수근.jpg";
+import Jiwon from "../assets/지원.jpg";
+import Kyuhyun from "../assets/규현.jpg";
+import Minho from "../assets/민호.jpg";
+import PO from "../assets/피오.jpg";
+
 const StHeader = styled.div`
   position: relative;
-  /* background-image: url(../../assets/header.jpg); */
-  background-color: cadetblue;
-  height: 500px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,58 +27,76 @@ const StTitle = styled.h1`
     font-style: normal;
   }
   position: absolute;
-  margin-bottom: 15vh;
+  margin-top: 50px;
   font-family: "YEONGJUPunggiGinsengTTF";
   font-size: 69px;
   color: white;
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  color: black;
 `;
 
-const StBtnsLayOut = styled.img`
-  position: absolute;
-  margin-top: 300px;
-  width: 950px;
-`;
 const StBtns = styled.div`
   position: absolute;
-  margin: 300px 0 0 4px;
+  margin: 250px 0 0 0;
 `;
 
 const StBtn = styled.button`
-  padding: 44px 62px;
-  margin-right: 5px;
+  width: 150px;
+  height: 150px;
+  margin-right: 15px;
   border: 1px solid white;
-  background-color: #111;
+  background-image: ${(props) => `url(${props.img})`};
+  background-size: cover;
+  background-position: center;
   color: white;
-  opacity: 0.5;
+  filter: ${(props) => (props.isSelected ? "brightness(1)" : "brightness(0.5)")};
   &:hover {
-    opacity: 0.8;
+    filter: brightness(1);
+    cursor: pointer;
   }
 `;
 
-function Header({ showLetters }) {
+function Header({ showLetters, handleMemberClick, selectedMember }) {
+
   return (
     <StHeader>
-      <StTitle>영원하라 무도!</StTitle>
-      <StBtnsLayOut src={Film} alt="btnsLayout" />
+      <StTitle>신서유기</StTitle>
       <StBtns>
-        <StBtn class="btn" onClick={() => showLetters("재석")}>
-          재석
-        </StBtn>
-        <StBtn class="btn" onClick={() => showLetters("명수")}>
-          명수
-        </StBtn>
-        <StBtn class="btn" onClick={() => showLetters("형돈")}>
-          형돈
-        </StBtn>
-        <StBtn class="btn" onClick={() => showLetters("준하")}>
-          준하
-        </StBtn>
-        <StBtn class="btn" onClick={() => showLetters("홍철")}>
-          홍철
-        </StBtn>
-        <StBtn class="btn" onClick={() => showLetters("하하")}>
-          하하
-        </StBtn>
+        <StBtn
+          img={Hodong}
+          onClick={() => handleMemberClick("호동")}
+          isSelected={selectedMember === "호동"}
+        ></StBtn>
+        <StBtn
+          img={Suguen}
+          onClick={() => handleMemberClick("수근")}
+          isSelected={selectedMember === "수근"}
+        ></StBtn>
+        <StBtn
+          img={Jiwon}
+          onClick={() => handleMemberClick("지원")}
+          isSelected={selectedMember === "지원"}
+        ></StBtn>
+        <StBtn
+          img={Kyuhyun}
+          onClick={() => handleMemberClick("규현")}
+          isSelected={selectedMember === "규현"}
+        ></StBtn>
+        <StBtn
+          img={Minho}
+          onClick={() => handleMemberClick("민호")}
+          isSelected={selectedMember === "민호"}
+        ></StBtn>
+        <StBtn
+          img={PO}
+          onClick={() => handleMemberClick("피오")}
+          isSelected={selectedMember === "피오"}
+        ></StBtn>
       </StBtns>
     </StHeader>
   );

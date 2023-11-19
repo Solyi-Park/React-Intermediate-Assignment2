@@ -68,6 +68,8 @@ const StAddLetterBtn = styled.button`
   &: hover {
     background-color: #282829;
     color: white;
+    cursor: pointer;
+    }
   }
 `;
 
@@ -82,7 +84,7 @@ export default function Input({
   selectMember,
 }) {
   return (
-    <StSection className="section">
+    <StSection>
       <form onSubmit={handleAddBtn}>
         <StNickNameArea>
           <label htmlFor="inputBox">닉네임</label>
@@ -98,21 +100,21 @@ export default function Input({
         <StContentArea>
           <label htmlFor="content">내용</label>
           <StContentInputField
-            className="contentInputField"
             value={content}
             onChange={changeContents}
             id="content"
+            placeholder="최대 100글자까지 작성할 수 있습니다."
           />
         </StContentArea>
         <StMemberSelect>
           <select value={member} onChange={selectMember} id="select">
             <option value="">멤버 선택</option>
-            <option value="재석">재석</option>
-            <option value="명수">명수</option>
-            <option value="형돈">형돈</option>
-            <option value="준하">준하</option>
-            <option value="홍철">홍철</option>
-            <option value="하하">하하</option>
+            <option value="호동">호동</option>
+            <option value="수근">수근</option>
+            <option value="지원">지원</option>
+            <option value="규현">규현</option>
+            <option value="민호">민호</option>
+            <option value="피오">피오</option>
           </select>
           <label htmlFor="select">에게</label>
           <StAddLetterBtn>팬레터 보내기</StAddLetterBtn>

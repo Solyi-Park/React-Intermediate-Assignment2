@@ -1,51 +1,81 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Letters.css";
-import LogoImage from "../assets/logoImg.png";  
-import styled from "styled-components";// 이미지를 import
+import styled from "styled-components";
 
- const StPfImg = styled.img`
-  width: 50px;
-  height: 50px;
+const StUl = styled.ul`
+  width: 550px;
+  margin: 0 auto 0 auto;
+`;
+
+const StLetter = styled.li`
+  width: 510px;
+  padding: 20px;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StPfImg = styled.img`
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
- `
+  margin-right: 20px;
+`;
+
+const StInfo = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: ;
+`;
+
+const StContent = styled.p`
+  margin-left: 70px;
+`;
+
+const StP = styled.p`
+  font-weight: 300;
+`;
+
+// Link는 왜 소괄호를 쓰나요..?
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export default function Letters({
-  letters, memberFiltering, handleLetterClick
+  letters,
+  memberFiltering,
+  handleLetterClick,
 }) {
   return (
-    <section style={{ backgroundColor: "#fabbaf" }}>
-      <ul>
+    <section>
+      <StUl>
         {letters
           .filter((item) => {
             return memberFiltering[item.member] === true;
           })
           .map((item) => {
             return (
-              <li
-                onClick={() => handleLetterClick(item)}
-                key={item.id}
-                style={{
-                  border: "1px solid black",
-                  padding: "5px",
-                  marginTop: "5px",
-                }}
-              >
-                <Link to={`/detail/${item.id}`}>
-                  <div>
+              <StLetter onClick={() => handleLetterClick(item)} key={item.id}>
+                <StyledLink to={`/detail/${item.id}`}>
+                  <StInfo>
+                    <StPfImg src={item.avatar} alt="profileImg" />
                     <div>
-                      <StPfImg src={LogoImage} alt="LogoImage" />  {/* 수정된 이미지 소스 사용 */}
-                      <div>
-                        <p>{item.nickName}</p>
-                        <p>{item.postTime}</p>
-                      </div>
+                      <StP>{item.nickName}</StP>
+                      <StP>{item.createdAt}</StP>
                     </div>
-                    <p>{item.content}</p>
-                  </div>
-                </Link>
-              </li>
+                  </StInfo>
+                  <StContent>{item.content}</StContent>
+                </StyledLink>
+              </StLetter>
             );
           })}
-      </ul>
+      </StUl>
     </section>
   );
 }

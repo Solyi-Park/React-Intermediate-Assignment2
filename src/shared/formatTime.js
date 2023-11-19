@@ -10,7 +10,7 @@ function formatCurrentDateAndTime() {
     month + 1
   }.${date} ${hours}:${minutes}:${seconds}`;
 
-  return formattedDateAndTime
+  return formattedDateAndTime;
 }
 
 export default formatCurrentDateAndTime;

@@ -1,22 +1,26 @@
-import './css/detail.css'
-import React, { useState } from "react";
+import "./css/detail.css";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import initialState from '../shared/data'
-
+import jsonData from "../shared/data";
 
 function Detail() {
-  const [ letters, setLetters ] = useState(initialState);
-  const params =useParams();
-  console.log('params: ', params)
-  // const foundData = initialState.find(item => {
-  //   return item.id === params.id
-  // })
+  const [letters, setLetters] = useState(jsonData);
+  const { id } = useParams();
 
-  
+  // useParams에서 가져온 id 값과 일치하는 팬레터를 찾아서 clickedLetter 상태로 설정
+  useEffect(() => {
+    const foundLetter = letters.find((letter) => letter.id === id);
+    setClickedLetter(foundLetter);
+  }, [id, letters]);
+
   // 수정모드 관리
   const [editMode, setEditMode] = useState(false);
   // 수정할 내용
   const [editContent, setEditContent] = useState("");
+
+  // 클릭된 레터 정보 저장
+  const [clickedLetter, setClickedLetter] = useState(null);
+  console.log("클릭한 레터 정보: ", clickedLetter);
 
   // 수정 버튼 이벤트 핸들러
   const handleEditLetter = () => {
@@ -55,10 +59,6 @@ function Detail() {
     }
   };
 
-  // 클릭된 레터 정보 저장
-  const [clickedLetter, setClickedLetter] = useState(null);
-  console.log('클릭한 레터 정보: ', clickedLetter)
-  
   return (
     <div>
       <Link to="/">홈으로</Link>
@@ -66,7 +66,7 @@ function Detail() {
         {!editMode && clickedLetter && (
           <div style={{ border: "1px solid #111", padding: "10px" }}>
             <div>
-              <h2>{clickedLetter.nickName}</h2>
+              <h2>{clickedLetter.ninkname}</h2>
               <h2>{clickedLetter.postTime}</h2>
             </div>
             <p>TO.&nbsp;{clickedLetter.member}</p>

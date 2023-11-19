@@ -1,31 +1,37 @@
 import "./css/home.css";
 import React, { useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
-import initialState from "../shared/data";
+import jsonData from "../shared/data";
 import formatCurrentDateAndTime from "../shared/formatTime";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Letters from "../components/Letters";
-
+import profileImg from "../assets/profileImg.jpg";
 
 function Home() {
-  const [letters, setLetters] = useState(initialState);
+  const [letters, setLetters] = useState(jsonData);
 
   const inputRef = useRef("");
 
   const [nickName, setName] = useState("");
   const [content, setContent] = useState("");
   const [member, setMember] = useState("");
+ // 현재 보이는 팬레터 리스트의 멤버
+ const [selectedMember, setSelectedMember] = useState(null);
 
+ // 클릭된 팬레터 정보 저장
   const [clickedLetter, setClickedLetter] = useState(null);
+  
+  //클릭한 멤버의 팬레터만 보이게 하기위해 필터링
   const [memberFiltering, setMemberFiltering] = useState({
-    재석: true,
-    명수: true,
-    형돈: true,
-    준하: true,
-    홍철: true,
-    하하: true,
+    호동: true,
+    수근: true,
+    지원: true,
+    규현: true,
+    민호: true,
+    피오: true,
   });
+ 
 
   //펜레터 작성 영역
   const changeNames = (e) => {
@@ -39,21 +45,32 @@ function Home() {
     setMember(memberValue);
   };
 
+  //팬레터추가 이벤트 핸들러
   const handleAddBtn = (e) => {
     e.preventDefault();
     const newLetter = {
-      id: uuid(),
+      createdAt: formatCurrentDateAndTime(),
+      avatar: profileImg,
       nickName,
       content,
       member,
-      postTime: formatCurrentDateAndTime,
+      id: uuid(),
     };
-    const updateLetters = [...letters, newLetter];
-    setLetters(updateLetters);
-    setName("");
-    setContent("");
-    setMember("");
-    inputRef.current.focus();
+    if (nickName === "") {
+      alert("닉네임을 입력해주세요.");
+    } else if (content === "") {
+      alert("내용을 입력해주세요.");
+    } else if (member === "") {
+      alert("멤버를 선택해주세요.");
+    } else {
+      const updateLetters = [...letters, newLetter];
+      setLetters(updateLetters);
+      alert(`${member}에게 팬레터 보내기 완료!`);
+      setName("");
+      setContent("");
+      setMember("");
+      inputRef.current.focus();
+    }
   };
 
   //멤버이름 클릭시 보여지는 레터 목록
@@ -74,18 +91,27 @@ function Home() {
       return updatedFiltering;
     });
   };
-  useEffect(() => {
-    console.log(memberFiltering);
-  }, [memberFiltering]);
+  // useEffect(() => {
+  //   console.log(memberFiltering);
+  // }, [memberFiltering]);
 
   // 클릭된 펜레터 정보 업데이트 이벤트 핸들러
   const handleLetterClick = (clickedLetter) => {
     setClickedLetter(clickedLetter);
   };
 
+  // 클릭된 멤버 정보 저장
+  const handleMemberClick = (member) => {
+    showLetters(member);
+    setSelectedMember(member);
+  };
+
+
   return (
     <div>
-      <Header showLetters={showLetters} />
+      <Header showLetters={showLetters}
+      handleMemberClick={handleMemberClick}
+      selectedMember={selectedMember} />
       <Input
         handleAddBtn={handleAddBtn}
         inputRef={inputRef}
