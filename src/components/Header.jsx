@@ -1,6 +1,6 @@
 // Header.jsx
 
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Hodong from "../assets/호동.jpg";
 import Suguen from "../assets/수근.jpg";
@@ -54,49 +54,25 @@ const StBtn = styled.button`
   background-size: cover;
   background-position: center;
   color: white;
-  filter: ${(props) => (props.isSelected ? "brightness(1)" : "brightness(0.5)")};
+  filter: ${(props) =>
+    props.isSelected ? "brightness(1)" : "brightness(0.5)"};
   &:hover {
     filter: brightness(1);
     cursor: pointer;
   }
 `;
 
-function Header({ showLetters, handleMemberClick, selectedMember }) {
-
+function Header({ showLetters }) {
   return (
     <StHeader>
       <StTitle>신서유기</StTitle>
       <StBtns>
-        <StBtn
-          img={Hodong}
-          onClick={() => handleMemberClick("호동")}
-          isSelected={selectedMember === "호동"}
-        ></StBtn>
-        <StBtn
-          img={Suguen}
-          onClick={() => handleMemberClick("수근")}
-          isSelected={selectedMember === "수근"}
-        ></StBtn>
-        <StBtn
-          img={Jiwon}
-          onClick={() => handleMemberClick("지원")}
-          isSelected={selectedMember === "지원"}
-        ></StBtn>
-        <StBtn
-          img={Kyuhyun}
-          onClick={() => handleMemberClick("규현")}
-          isSelected={selectedMember === "규현"}
-        ></StBtn>
-        <StBtn
-          img={Minho}
-          onClick={() => handleMemberClick("민호")}
-          isSelected={selectedMember === "민호"}
-        ></StBtn>
-        <StBtn
-          img={PO}
-          onClick={() => handleMemberClick("피오")}
-          isSelected={selectedMember === "피오"}
-        ></StBtn>
+        <StBtn img={Hodong} onClick={() => showLetters("호동")}></StBtn>
+        <StBtn img={Suguen} onClick={() => showLetters("수근")}></StBtn>
+        <StBtn img={Jiwon} onClick={() => showLetters("지원")}></StBtn>
+        <StBtn img={Kyuhyun} onClick={() => showLetters("규현")}></StBtn>
+        <StBtn img={Minho} onClick={() => showLetters("민호")}></StBtn>
+        <StBtn img={PO} onClick={() => showLetters("피오")}></StBtn>
       </StBtns>
     </StHeader>
   );

@@ -100,17 +100,9 @@ function Home() {
     setClickedLetter(clickedLetter);
   };
 
-  // 클릭된 멤버 정보 저장
-  const handleMemberClick = (member) => {
-    showLetters(member);
-    setSelectedMember(member);
-  };
-
-
   return (
     <div>
       <Header showLetters={showLetters}
-      handleMemberClick={handleMemberClick}
       selectedMember={selectedMember} />
       <Input
         handleAddBtn={handleAddBtn}
@@ -121,11 +113,12 @@ function Home() {
         member={member}
         content={content}
         selectMember={selectMember}
+        handleLetterClick={handleLetterClick}
       />
       <Letters
         letters={letters}
         memberFiltering={memberFiltering}
-        handleLetterClick={handleLetterClick}
+
       />
     </div>
   );

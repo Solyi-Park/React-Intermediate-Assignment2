@@ -41,7 +41,7 @@ const StP = styled.p`
   font-weight: 300;
 `;
 
-// Link는 왜 소괄호를 쓰나요..?
+// Link는 왜 소괄호를 쓰는거지..?
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;

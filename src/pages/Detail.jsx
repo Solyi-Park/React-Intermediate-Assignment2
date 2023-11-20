@@ -7,11 +7,14 @@ function Detail() {
   const [letters, setLetters] = useState(jsonData);
   const { id } = useParams();
 
-  // useParams에서 가져온 id 값과 일치하는 팬레터를 찾아서 clickedLetter 상태로 설정
   useEffect(() => {
-    const foundLetter = letters.find((letter) => letter.id === id);
-    setClickedLetter(foundLetter);
-  }, [id, letters]);
+
+    const foundData = jsonData.find((item) => item.id === id);
+    setClickedLetter(foundData);
+    setLetters(jsonData); 
+  }, [id]); // id가 변경될 때마다 실행
+
+
 
   // 수정모드 관리
   const [editMode, setEditMode] = useState(false);
@@ -20,7 +23,6 @@ function Detail() {
 
   // 클릭된 레터 정보 저장
   const [clickedLetter, setClickedLetter] = useState(null);
-  console.log("클릭한 레터 정보: ", clickedLetter);
 
   // 수정 버튼 이벤트 핸들러
   const handleEditLetter = () => {
@@ -59,14 +61,16 @@ function Detail() {
     }
   };
 
+
+
   return (
     <div>
       <Link to="/">홈으로</Link>
       <div>
-        {!editMode && clickedLetter && (
+        {
           <div style={{ border: "1px solid #111", padding: "10px" }}>
             <div>
-              <h2>{clickedLetter.ninkname}</h2>
+              <h2>{clickedLetter.nickName}</h2>
               <h2>{clickedLetter.postTime}</h2>
             </div>
             <p>TO.&nbsp;{clickedLetter.member}</p>
@@ -76,7 +80,7 @@ function Detail() {
               <button onClick={handleDeleteLetter}>삭제</button>
             </div>
           </div>
-        )}
+        }
         {editMode && (
           <div>
             <label htmlFor="editContent"></label>
